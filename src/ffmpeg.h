@@ -184,7 +184,13 @@ protected:
 };
 
 // Extended attributes
-#if AV_GCC_VERSION_AT_LEAST(3,1)
+#ifndef __has_cpp_attribute
+# define __has_cpp_attribute(x) 0
+#endif
+
+#if __has_cpp_attribute(deprecated)
+#    define attribute_deprecated2(x) [[deprecated(x)]]
+#elif AV_GCC_VERSION_AT_LEAST(3,1)
 #    define attribute_deprecated2(x) __attribute__((deprecated(x)))
 #elif defined(_MSC_VER)
 #    define attribute_deprecated2(x) __declspec(deprecated(x))
