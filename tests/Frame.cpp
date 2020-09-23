@@ -8,6 +8,10 @@
 # pragma warning (disable : 4702) // Disable warning: unreachable code
 #endif
 
+#ifdef __clang__
+# pragma clang diagnostic ignored "-Wpessimizing-move"
+#endif
+
 
 using namespace std;
 
