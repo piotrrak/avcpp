@@ -75,7 +75,7 @@ avcpp_sources = [
 
 ]
 
-avcpp_header = [
+avcpp_header = files(
     'audioresampler.h',
     'averror.h',
     'av.h',
@@ -98,16 +98,17 @@ avcpp_header = [
     'stream.h',
     'timestamp.h',
     'videorescaler.h',
-]
+)
 
-avcpp_filter_header = [
+avcpp_filter_header = files(
     'filters/buffersink.h',
     'filters/buffersrc.h',
     'filters/filtercontext.h',
     'filters/filtergraph.h',
     'filters/filter.h',
     'filters/filterpad.h',
-]
+)
+
 
 #defining how to build the library
 avcpp = library(
@@ -120,9 +121,12 @@ avcpp = library(
     install : true
 )
 
+# make library usable as meson subproject
+# workarounds https://github.com/mesonbuild/meson/issues/2546
+subdir('avcpp')
+
 install_headers(avcpp_header, subdir : 'avcpp')
 install_headers(avcpp_filter_header, subdir : 'avcpp/filters')
-
 
 #export the dependency information
 avcpp_dep = declare_dependency(
