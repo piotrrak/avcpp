@@ -40,6 +40,7 @@ TEST_CASE("Deleter Checking", "[AvDeleter]")
 
         // store
         auto buf_ref_copy = *buf_ref;
+        (void)buf_ref_copy; // Silence -Wunused
 
         {
             auto clone = av_frame_clone(frame);
